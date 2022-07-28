@@ -51,34 +51,30 @@ The main tasks for this exercise are as follows:
 
 #### Task 1: Create a Hyper-V virtual switch
 
-1. On **SEA-ADM1**, open **Server Manager**. 
-1. In Server Manager, select **All Servers**. 
-1. In the Servers list, select **SEA-SVR1** and use its context-sensitive menu to start **Hyper-V Manager** targeting that server. 
-1. In **Hyper-V Manager**, use the **Virtual Switch Manager** to create on **SEA-SVR1** a virtual switch with the following settings:
+1. On **JumpVM**, open **Hyper-V Manager**. 
+1. In **Hyper-V Manager**, use the **Virtual Switch Manager** to create on **JumpVM** a virtual switch with the following settings:
 
    - Name: **Contoso Private Switch**
    - Connection type: **Private network**
 
 #### Task 2: Create a virtual hard disk
 
-1. On **SEA-ADM1**, in Hyper-V Manager, use the **New Virtual Hard Disk Wizard** to create on **SEA-SVR1** a new virtual hard disk with the following settings: 
+1. On **JumpVM**, in Hyper-V Manager, use the **New Virtual Hard Disk Wizard** to create a new virtual hard disk with the following settings: 
 
    - Disk Format: **VHD**
-   - Disk Type: **Differencing**
-   - Name: **SEA-VM1**
-   - Location: **C:\Base**
-   - Parent Disk: **C:\Base\BaseImage.vhd**
+   - Disk Type: **Fixed size**
+   - Name: **Jump-VM1.vhd**
+   - Create a new virtual Hard Disk: **30 GB**
 
 #### Task 3: Create a virtual machine
 
-1. On **SEA-ADM1**, in Hyper-V Manager, on **SEA-SVR1**, create a new virtual machine with the following settings: 
+1. On **JumpVM**, in Hyper-V Manager, create a new virtual machine with the following settings: 
 
    - Name: **SEA-VM1**
-   - Location: **C:\Base**
    - Generation: **Generation 1**
    - Memory: **4096**
    - Networking: **Contoso Private Switch**
-   - Hard disk: **C:\Base\SEA-VM1.vhd**
+   - Hard disk: **C:\VirtualMachines\Jump-VM1.vhd**
 
 1. Open the **Settings** window for **SEA-VM1** and enable **Dynamic Memory** with a Maximum RAM value of **4096**.
 1. Close Hyper-V Manager.
