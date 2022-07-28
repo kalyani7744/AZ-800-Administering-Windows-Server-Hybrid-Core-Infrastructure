@@ -292,16 +292,20 @@ The main tasks for this exercise are:
 1. Run the following commands to create the **C:\Temp** directory on **SEA-SVR1**, copy the **AzureADPasswordProtectionProxySetup.exe** installer to that directory, and invoke the installation:
 
    ```powershell
+   $User = "Contoso\Administrator"
+   $PWord = ConvertTo-SecureString -String "Pa55w.rd" -AsPlainText -Force
+   $Credential = New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList $User, $PWord
    New-Item -Type Directory -Path '\\SEA-SVR1.contoso.com\C$\Temp' -Force
    Copy-Item -Path "$env:USERPROFILE\Downloads\AzureADPasswordProtectionProxySetup.exe" -Destination '\\SEA-SVR1.contoso.com\C$\Temp\'
-   Invoke-Command -ComputerName SEA-SVR1.contoso.com -ScriptBlock { Start-Process -FilePath C:\Temp\AzureADPasswordProtectionProxySetup.exe -ArgumentList `/quiet /log C:\Temp\AzureADPPProxyInstall.log` -Wait }
+   Invoke-Command -ComputerName SEA-SVR1.contoso.com -Credential $credential -ScriptBlock { Start-Process -FilePath C:\Temp\AzureADPasswordProtectionProxySetup.exe -  ArgumentList '/quiet /qn /norestart /log C:\Temp\AzureADPPProxyInstall.log' -Wait }
+
    ```
 1. Run the following commands to create the **C:\Temp** directory on **SEA-DC1**, copy the **AzureADPasswordProtectionDCAgentSetup.msi** installer to that directory, invoke the installation, and restart the domain controller after the installation completes:
 
    ```powershell
    New-Item -Type Directory -Path '\\SEA-DC1.contoso.com\C$\Temp' -Force
    Copy-Item -Path "$env:USERPROFILE\Downloads\AzureADPasswordProtectionDCAgentSetup.msi" -Destination '\\SEA-DC1.contoso.com\C$\Temp\'
-   Invoke-Command -ComputerName SEA-DC1.contoso.com -ScriptBlock { Start-Process msiexec.exe -ArgumentList '/i C:\Temp\AzureADPasswordProtectionDCAgentSetup.msi /quiet /qn /norestart /log C:\Temp\AzureADPPInstall.log' -Wait }
+   Invoke-Command -ComputerName SEA-DC1.contoso.com -Credential $credential -ScriptBlock { Start-Process msiexec.exe -ArgumentList '/i C:\Temp\AzureADPasswordProtectionDCAgentSetup.msi /quiet /qn /norestart /log C:\Temp\AzureADPPInstall.log' -Wait }
    Restart-Computer -ComputerName SEA-DC1.contoso.com -Force
    ```
 1. Run the following commands to validate that the installations resulted in the creation of services necessary to implement Azure AD Password Protection:
