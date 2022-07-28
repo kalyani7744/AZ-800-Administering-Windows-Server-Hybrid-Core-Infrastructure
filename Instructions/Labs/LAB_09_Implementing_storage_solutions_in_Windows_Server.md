@@ -163,6 +163,7 @@ The main tasks for this exercise are as follows:
 1. Run the following command to install iSCSI target on **SEA-SVR3**:
 
    ```powershell
+   Get-command -module iSCSITarget
    Install-WindowsFeature –Name FS-iSCSITarget-Server –IncludeManagementTools
    ```
 1. Run the following commands to create a new volume formatted with ReFS on disk 2:
