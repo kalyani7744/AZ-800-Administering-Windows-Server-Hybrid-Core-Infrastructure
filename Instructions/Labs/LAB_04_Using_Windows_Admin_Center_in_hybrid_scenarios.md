@@ -287,13 +287,13 @@ The main tasks for this exercise are as follows:
 1. From the Cloud Shell pane, run the following command to list all resource groups created throughout this lab:
 
    ```powershell
-   Get-AzResourceGroup -Name 'az800l04*'
+   Get-AzResourceGroup -Name 'az800-l04*'
    ```
 
 1. Run the following command to delete all resource groups you created throughout this lab:
 
    ```powershell
-   Get-AzResourceGroup -Name 'az800l04*' | Remove-AzResourceGroup -Force -AsJob
+   Get-AzResourceGroup -Name 'az800-l04*' | Remove-AzResourceGroup -Force -AsJob
    ```
 
    >**Note**: The command executes asynchronously (as determined by the -AsJob parameter). So, while you'll be able to run another PowerShell command immediately afterwards within the same PowerShell session, it will take a few minutes before the resource groups are actually removed.
