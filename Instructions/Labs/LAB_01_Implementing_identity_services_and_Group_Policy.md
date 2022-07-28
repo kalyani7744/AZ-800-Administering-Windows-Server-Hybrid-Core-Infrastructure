@@ -47,6 +47,14 @@ The main tasks for this exercise are as follows:
 
 1. Switch to **SEA-ADM1** and from **Server Manager**, open Windows PowerShell.
 1. Use the **Install-WindowsFeature** cmdlet in Windows PowerShell to install the AD DS role on **SEA-SVR1**.
+   
+   ```
+   $User = "Contoso\Administrator"
+   $PWord = ConvertTo-SecureString -String "Pa55w.rd" -AsPlainText -Force
+   $Credential = New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList $User, $PWord
+   Install-WindowsFeature –Name AD-Domain-Services –ComputerName SEA-SVR1 -Credential $Credential
+   ```
+
 1. Use the **Get-WindowsFeature** cmdlet to verify the installation.
 1. Ensure that you select the **Active Directory Domain Services**, **Remote Server Administration Tools**, and **Role Administration Tools** checkboxes. For the **AD DS** and **AD LDS Tools** nodes, only the **Active Directory module for Windows PowerShell** should be installed, and not the graphical tools, such as the Active Directory Administrative Center.
 
@@ -78,12 +86,12 @@ The main tasks for this exercise are as follows:
 1. Switch to Windows PowerShell, and then at the command prompt, enter the following command:
 
    ```powershell
-   Invoke-Command –ComputerName SEA-SVR1 { }
+   Invoke-Command –ComputerName SEA-SVR1 -Credential $credential { }
    ```
 1. Paste the copied command between the braces ({ }) and run the resulting command to start the installation. The complete command should have the following format:
 
    ```powershell
-   Invoke-Command –ComputerName SEA-SVR1 {Install-ADDSDomainController -NoGlobalCatalog:\$false -CreateDnsDelegation:\$false -Credential (Get-Credential) -CriticalReplicationOnly:\$false -DatabasePath "C:\Windows\NTDS" -DomainName "Contoso.com" -InstallDns:\$true -LogPath "C:\Windows\NTDS" -NoRebootOnCompletion:\$false -SiteName "Default-First-Site-Name" -SysvolPath "C:\Windows\SYSVOL" -Force:\$true}
+   Invoke-Command -ComputerName SEA-SVR1 -Credential $credential {Install-ADDSDomainController -NoGlobalCatalog:$false -CreateDnsDelegation:$false -Credential (Get-Credential) -CriticalReplicationOnly:$false -DatabasePath "C:\Windows\NTDS" -DomainName "contoso.com" -InstallDns:$true -LogPath "C:\Windows\NTDS" -NoRebootOnCompletion:$false -SiteName "Default-First-Site-Name" -SysvolPath "C:\Windows\SYSVOL" -Force:$true}
    ```
 
 1. Provide the following credentials:
