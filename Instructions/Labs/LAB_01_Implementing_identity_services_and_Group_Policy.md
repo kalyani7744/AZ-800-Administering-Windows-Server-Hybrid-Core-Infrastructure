@@ -56,6 +56,11 @@ The main tasks for this exercise are as follows:
    ```
 
 1. Use the **Get-WindowsFeature** cmdlet to verify the installation.
+   
+   ```
+   Get-WindowsFeature –ComputerName SEA-SVR1
+   ```
+
 1. Ensure that you select the **Active Directory Domain Services**, **Remote Server Administration Tools**, and **Role Administration Tools** checkboxes. For the **AD DS** and **AD LDS Tools** nodes, only the **Active Directory module for Windows PowerShell** should be installed, and not the graphical tools, such as the Active Directory Administrative Center.
 
 > **Note**: If you centrally manage your servers, you will not usually need GUI tools on each server. If you want to install them, you need to specify the AD DS tools by running the **Add-WindowsFeature** cmdlet with the **RSAT-ADDS** command.
