@@ -193,7 +193,7 @@ The main tasks for this exercise are as follows:
    $partition3.DriveLetter
    ```
 
-   > **Note**: The instructions assume that drive letters are **E** and **F** respectively. If your drive letter assignments are different, take this into account as you follow instructions in this exercise.
+   > **Note**: The instructions assume that drive letters are **D** and **E** respectively. If your drive letter assignments are different, take this into account as you follow instructions in this exercise.
 
 #### Task 2: Connect to and configure iSCSI targets
 
@@ -201,7 +201,7 @@ The main tasks for this exercise are as follows:
 1. In **Server Manager**, in **File and Storage Services**, switch to the iSCSI pane. 
 1. From the iSCSI pane, create an iSCSI virtual disk with the following settings:
 
-   - Storage Location: **E:**
+   - Storage Location: **D:**
    - Name: **iSCSIDisk1**
    - Disk size: **5 GB**, **Dynamically Expanding**
    - iSCSI target: **New**
@@ -210,7 +210,7 @@ The main tasks for this exercise are as follows:
 
 1. Create a second iSCSI virtual disk with the following settings:
 
-   - Storage Location: **F:**
+   - Storage Location: **E:**
    - Name: **iSCSIDisk2**
    - Disk size: **5 GB**, **Dynamically Expanding**
    - iSCSI target: **iSCSIFarm**
@@ -247,8 +247,8 @@ The main tasks for this exercise are as follows:
 
    ```powershell
    Initialize-Disk -Number 1
-   New-Partition -DiskNumber 1 -UseMaximumSize -DriveLetter E
-   Format-Volume -DriveLetter E -FileSystem ReFS
+   New-Partition -DiskNumber 1 -UseMaximumSize -DriveLetter D
+   Format-Volume -DriveLetter D -FileSystem ReFS
    ```
 1. Repeat the previous step to create a new drive formatted with ReFS, but this time, use the disk number **2** and the drive letter **F**.
 1. Switch back to the console session to **SEA-ADM1**, with the **Server Manager** window active.
